@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "733755948663",
+    "firebase_url": "https://taskoro-38e60.firebaseio.com",
+    "project_id": "taskoro-38e60",
+    "storage_bucket": "taskoro-38e60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733755948663:android:65f2ba30a4a17e603e9072",
+        "android_client_info": {
+          "package_name": "com.example.taskoro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733755948663-hpi1gsg28cho5pibf0iramk8aaek10rb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh4HkJSMV_8EJ8XdrKhKVZlyUwnZYdZS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "733755948663-hpi1gsg28cho5pibf0iramk8aaek10rb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
