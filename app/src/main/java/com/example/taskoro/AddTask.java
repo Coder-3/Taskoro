@@ -40,7 +40,6 @@ public class AddTask extends AppCompatActivity {
                 String name = taskName.getText().toString().trim();
                 String description = taskDescription.getText().toString().trim();
                 String time = taskTime.getText().toString().trim();
-                Log.i("Name", name);
                 tasks.setTaskName(name);
                 tasks.setTaskDescription(description);
                 tasks.setTaskTime(time);
