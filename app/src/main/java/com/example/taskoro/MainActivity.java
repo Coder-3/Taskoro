@@ -21,11 +21,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
+    FirebaseListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +52,33 @@ public class MainActivity extends AppCompatActivity {
 //        String taskDescriptions[];
 //        String taskTimes[];
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Tasks");
+//        reference = FirebaseDatabase.getInstance().getReference().child("Tasks");
         listView = findViewById(R.id.listView);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+        Query query = FirebaseDatabase.getInstance().getReference().child("Tasks");
+
+
+        FirebaseListOptions<Tasks> options = new FirebaseListOptions.Builder<Tasks>().setLayout(R.layout.item).setQuery(query, Tasks.class).build();
+
+        adapter = new FirebaseListAdapter(options) {
+            @Override
+            protected void populateView(@NonNull View v, @NonNull Object model, int position) {
+                TextView tskName = v.findViewById(R.id.taskName);
+                TextView tskDesc = v.findViewById(R.id.taskDescription);
+                TextView tskTime = v.findViewById(R.id.taskTime);
+
+                Tasks tsk = (Tasks) model;
+
+                tskName.setText("Task name: " + tsk.getTaskName());
+                tskDesc.setText("Task Description: " + tsk.getTaskDescription());
+                tskTime.setText("Task Time: " + tsk.getTaskTime());
+            }
+        };
+
+        listView.setAdapter(adapter);
+
+
+
+//        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
 
 //        MyAdapter adapter = new MyAdapter(this, taskNames, taskDescriptions, taskTimes);
 
@@ -60,42 +88,42 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        listView.setAdapter(arrayAdapter);
-        reference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String value = dataSnapshot.getValue(Tasks.class).toString();
-                arrayList.add(value);
-                arrayAdapter.notifyDataSetChanged();
-
-//                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
-//                    Tasks data = dataSnapshot1.getValue(Tasks.class);
-//                    String stringData = data.toString();
-//                    arrayList.add(stringData);
-//                    arrayAdapter.notifyDataSetChanged();
-//                }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        listView.setAdapter(arrayAdapter);
+//        reference.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//                String value = dataSnapshot.getValue(Tasks.class).toString();
+//                arrayList.add(value);
+//                arrayAdapter.notifyDataSetChanged();
+//
+////                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+////                    Tasks data = dataSnapshot1.getValue(Tasks.class);
+////                    String stringData = data.toString();
+////                    arrayList.add(stringData);
+////                    arrayAdapter.notifyDataSetChanged();
+////                }
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//                arrayAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
 //        reference.addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -113,31 +141,43 @@ public class MainActivity extends AppCompatActivity {
 //        })
     }
 
-    class MyAdapter extends ArrayAdapter<String> {
-        Context context;
-        String taskNames[];
-        String taskDescriptions[];
-        String taskTimes[];
-
-        MyAdapter(Context c, String taskName[], String taskDescription[], String taskTime[]) {
-            super(c, R.layout.item, R.id.taskName, taskName);
-            this.context = c;
-            this.taskDescriptions = taskDescription;
-            this.taskTimes = taskTime;
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View item = layoutInflater.inflate(R.layout.item, parent, false);
-            TextView theTaskNames = item.findViewById(R.id.taskName);
-            TextView theTaskDescriptions = item.findViewById(R.id.taskDescription);
-            TextView theTaskTimes = item.findViewById(R.id.taskTime);
-
-            return item;
-        }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+//    class MyAdapter extends ArrayAdapter<String> {
+//        Context context;
+//        String taskNames[];
+//        String taskDescriptions[];
+//        String taskTimes[];
+//
+//        MyAdapter(Context c, String taskName[], String taskDescription[], String taskTime[]) {
+//            super(c, R.layout.item, R.id.taskName, taskName);
+//            this.context = c;
+//            this.taskDescriptions = taskDescription;
+//            this.taskTimes = taskTime;
+//        }
+//
+//        @NonNull
+//        @Override
+//        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//            LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            View item = layoutInflater.inflate(R.layout.item, parent, false);
+//            TextView theTaskNames = item.findViewById(R.id.taskName);
+//            TextView theTaskDescriptions = item.findViewById(R.id.taskDescription);
+//            TextView theTaskTimes = item.findViewById(R.id.taskTime);
+//
+//            return item;
+//        }
+//    }
 //
 //    private void fetchData(DataSnapshot dataSnapshot)
 //    {

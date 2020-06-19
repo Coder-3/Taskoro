@@ -8,6 +8,12 @@ public class Tasks {
     public Tasks() {
     }
 
+    public Tasks(String taskName, String taskDescription, String taskTime) {
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+        this.taskTime = taskTime;
+    }
+
     public String getTaskName() {
         return taskName;
     }
