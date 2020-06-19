@@ -76,6 +76,18 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("Clicked?", "clicked");
+                Intent deleteTask = new Intent(MainActivity.this, DeleteTask.class);
+                Tasks t = (Tasks) adapterView.getItemAtPosition(i);
+                deleteTask.putExtra("taskName", t.getTaskName());
+                deleteTask.putExtra("taskDescription", t.getTaskDescription());
+                deleteTask.putExtra("taskTime", t.getTaskTime());
+                startActivity(deleteTask);
+            }
+        });
 
 
 //        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
@@ -226,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
     public void pomodoro() {
-
+        reference.removeValue();
     }
 
     public void newTaskButton(View view) {
