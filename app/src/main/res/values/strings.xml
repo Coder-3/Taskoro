@@ -1,5 +1,21 @@
 <resources>
     <string name="app_name">Taskoro</string>
-    <string name="pomodoro">Pomodoro</string>
-    <string name="completed">Completed</string>
+    <string name="completed">Task Completed</string>
+    <string name="startTimer">Start Timer</string>
+    <string name="pauseTimer">Pause Timer</string>
+    <string name="saveTimer">Save Timer</string>
+    <string name="newTaskHeading">Create New Task</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
+    <string name="timerHeading">Task Timer</string>
+    <string name="timer">Timer</string>
+    <string name="close">Close</string>
+    <string name="newTask">New Task</string>
+    <string name="expectedDuration">Expected Duration</string>
+    <string name="expectedDurationHint">How long will the task take?</string>
+    <string name="taskName">Task Name</string>
+    <string name="taskNameHint">Enter the task name</string>
+    <string name="taskDesc">Task Description</string>
+    <string name="taskDescHint">Enter the task description</string>
+    <string name="timeSpent">You have spent 00:00 on this task</string>
 </resources>

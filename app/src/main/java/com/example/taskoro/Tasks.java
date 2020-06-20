@@ -4,14 +4,10 @@ public class Tasks {
     private String taskName;
     private String taskDescription;
     private String taskTime;
+    private String timeSpent;
+    private long timeDiff;
 
     public Tasks() {
-    }
-
-    public Tasks(String taskName, String taskDescription, String taskTime) {
-        this.taskName = taskName;
-        this.taskDescription = taskDescription;
-        this.taskTime = taskTime;
     }
 
     public String getTaskName() {
@@ -26,9 +22,7 @@ public class Tasks {
         return taskDescription;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
-    }
+    public void setTaskDescription(String taskDescription) { this.taskDescription = taskDescription; }
 
     public String getTaskTime() {
         return taskTime;
@@ -37,4 +31,19 @@ public class Tasks {
     public void setTaskTime(String taskTime) {
         this.taskTime = taskTime;
     }
+
+    public String getTimeSpent() {
+        return timeSpent;
+    }
+
+    public void setTimeSpent(String timeSpent) {
+        this.timeSpent = timeSpent;
+    }
+
+    public long getTimeDiff() {
+        return timeDiff;
+    }
+
+    public void setTimeDiff(long timeDiff) { this.timeDiff = timeDiff; }
+
 }

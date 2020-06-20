@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,10 +39,15 @@ public class AddTask extends AppCompatActivity {
                 String name = taskName.getText().toString().trim();
                 String description = taskDescription.getText().toString().trim();
                 String time = taskTime.getText().toString().trim();
+                String timeSpent = "00:00";
+                long timeDiff = 0;
+
                 tasks.setTaskName(name);
                 tasks.setTaskDescription(description);
                 tasks.setTaskTime(time);
-                reference.push().setValue(tasks);
+                tasks.setTimeSpent(timeSpent);
+                tasks.setTimeDiff(timeDiff);
+                reference.child(name).setValue(tasks);
 
                 startActivity(new Intent(getApplicationContext(),MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }

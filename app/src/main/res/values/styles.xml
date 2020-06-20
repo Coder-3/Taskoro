@@ -4,6 +4,6 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/medDark</item>
         <item name="colorPrimaryDark">@color/maxDark</item>
-        <item name="colorAccent">@color/text</item>
+        <item name="colorAccent">@color/orange</item>
     </style>
 </resources>

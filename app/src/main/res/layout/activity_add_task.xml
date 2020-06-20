@@ -7,7 +7,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="@color/text"
+        android:background="@color/orange"
         android:layout_height="198dp">
 
         <TextView
@@ -15,7 +15,7 @@
             android:layout_marginTop="20dp"
             android:textSize="26sp"
             android:textColor="#FFF"
-            android:text="Create New Task"
+            android:text="@string/newTaskHeading"
             android:textAlignment="center"
             android:layout_marginBottom="18dp"
             android:layout_width="match_parent"
@@ -26,7 +26,6 @@
             android:layout_width="match_parent"
             android:background="@color/medDark"
             android:layout_height="1dp" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -51,8 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Task Name"
-                android:textColor="@color/text"
+                android:text="@string/taskName"
+                android:textColor="@color/orange"
                 android:textSize="18sp" />
 
             <EditText
@@ -60,12 +59,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:background="@color/lightDark"
-                android:hint="Name of your task"
+                android:hint="@string/taskNameHint"
                 android:inputType="text"
-                android:paddingLeft="12dp"
-                android:textColor="@color/text"
-                android:textColorHint="#B5B5B5" />
-
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/orange"
+                android:textColorHint="#B5B5B5"
+                android:autofillHints="@string/taskNameHint" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,8 +80,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Description"
-                android:textColor="@color/text"
+                android:text="@string/taskDesc"
+                android:textColor="@color/orange"
                 android:textSize="18sp" />
 
             <EditText
@@ -89,13 +89,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:background="@color/lightDark"
-                android:hint="Description of your task"
+                android:hint="@string/taskDescHint"
                 android:inputType="text"
                 android:maxLength="25"
-                android:paddingLeft="12dp"
-                android:textColor="@color/text"
-                android:textColorHint="#B5B5B5" />
-
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/orange"
+                android:textColorHint="#B5B5B5"
+                android:autofillHints="@string/taskDescHint" />
         </LinearLayout>
 
         <LinearLayout
@@ -110,8 +111,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Time"
-                android:textColor="@color/text"
+                android:text="@string/expectedDuration"
+                android:textColor="@color/orange"
                 android:textSize="18sp" />
 
             <EditText
@@ -119,12 +120,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:background="@color/lightDark"
-                android:hint="Task amount of time in minutes"
+                android:hint="@string/expectedDurationHint"
                 android:inputType="text"
-                android:paddingLeft="12dp"
-                android:textColor="@color/text"
-                android:textColorHint="#B5B5B5" />
-
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/orange"
+                android:textColorHint="#B5B5B5"
+                android:autofillHints="@string/expectedDurationHint" />
         </LinearLayout>
     </LinearLayout>
 
@@ -133,19 +135,20 @@
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
-        android:text="Create"
+        android:text="@string/create"
         android:textColor="#FFF"
         android:textAllCaps="false"
-        android:background="@color/text"
+        android:background="@color/orange"
         android:textSize="22sp"
         android:layout_width="match_parent"
         android:layout_height="55dp"/>
+
     <Button
         android:id="@+id/cancelTaskButton"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="14dp"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:textColor="#FFF"
         android:textAllCaps="false"
         android:background="@color/lightDark"
