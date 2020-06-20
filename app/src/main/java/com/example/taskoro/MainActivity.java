@@ -21,6 +21,7 @@ import com.google.firebase.database.Query;
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
+    // Custom adapter from FirebaseUI library
     FirebaseListAdapter adapter;
 
     @Override
@@ -29,10 +30,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView = findViewById(R.id.listView);
+        // Whole database -> each individual Task
         final Query query = FirebaseDatabase.getInstance().getReference().child("Tasks");
 
+        // Sets the layout of the ListView items, plugs in the database and the class which defines each Task
         FirebaseListOptions<Tasks> options = new FirebaseListOptions.Builder<Tasks>().setLayout(R.layout.item).setQuery(query, Tasks.class).build();
 
+        /*
+            Finds the TextViews from the layout responsible for defining the appearance of each ListView item
+            Assigns to each TextView the relevant task information from the database
+            Each item in the ListView corresponds to a task
+         */
         adapter = new FirebaseListAdapter(options) {
             @SuppressLint("SetTextI18n")
             @Override
@@ -51,16 +59,25 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        // Sets the above adapter to the ListView
         listView.setAdapter(adapter);
+        /*
+            For the current task that is clicked on:
+                Get the Task class
+                Send the tasks name, description, time spent and time diff to the Timer activity
+                Go to the Timer activity
+         */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Tasks tsk = (Tasks) adapterView.getItemAtPosition(i);
 
                 Intent timer = new Intent(MainActivity.this, Timer.class);
+
                 timer.putExtra("taskName", tsk.getTaskName());
                 timer.putExtra("timeSpent", tsk.getTimeSpent());
                 timer.putExtra("timeDiff", tsk.getTimeDiff());
+
                 startActivity(timer);
             }
         });
@@ -78,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.stopListening();
     }
 
+    // Goes to the activity for creating new Tasks
     public void newTaskButton(View view) {
         Intent intent = new Intent(this, AddTask.class);
         startActivity(intent);
